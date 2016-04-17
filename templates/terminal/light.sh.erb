@@ -1,7 +1,7 @@
 <%
 # Terminal Color Setup Template
 # Chris Kempson (http://chriskempson.com)
-%>#!/bin/sh
+%>#!/bin/sh -eu
 # Base16 <%= @scheme %> - Terminal color setup script
 # <%= @author %>
 #
@@ -16,30 +16,32 @@ if ! tput ccc; then
   return 1 2>/dev/null || exit 1
 fi
 
-tput initc  0 <%= to_initc(@base["00"]) %> # Base 00 - Black
-tput initc  1 <%= to_initc(@base["08"]) %> # Base 08 - Red
-tput initc  2 <%= to_initc(@base["0B"]) %> # Base 0B - Green
-tput initc  3 <%= to_initc(@base["0A"]) %> # Base 0A - Yellow
-tput initc  4 <%= to_initc(@base["0D"]) %> # Base 0D - Blue
-tput initc  5 <%= to_initc(@base["0E"]) %> # Base 0E - Magenta
-tput initc  6 <%= to_initc(@base["0C"]) %> # Base 0C - Cyan
-tput initc  7 <%= to_initc(@base["05"]) %> # Base 05 - White
-tput initc  8 <%= to_initc(@base["03"]) %> # Base 03 - Bright Black
+tput -S <<EOF
+initc  0 <%= to_initc(@base["00"]) %>
+initc  1 <%= to_initc(@base["08"]) %>
+initc  2 <%= to_initc(@base["0B"]) %>
+initc  3 <%= to_initc(@base["0A"]) %>
+initc  4 <%= to_initc(@base["0D"]) %>
+initc  5 <%= to_initc(@base["0E"]) %>
+initc  6 <%= to_initc(@base["0C"]) %>
+initc  7 <%= to_initc(@base["05"]) %>
+initc  8 <%= to_initc(@base["03"]) %>
 
-tput initc  9 <%= to_initc(@base["08"]) %> # Base 08 - Bright Red
-tput initc 10 <%= to_initc(@base["0B"]) %> # Base 0B - Bright Green
-tput initc 11 <%= to_initc(@base["0A"]) %> # Base 0A - Bright Yellow
-tput initc 12 <%= to_initc(@base["0D"]) %> # Base 0D - Bright Blue
-tput initc 13 <%= to_initc(@base["0E"]) %> # Base 0E - Bright Magenta
-tput initc 14 <%= to_initc(@base["0C"]) %> # Base 0C - Bright Cyan
+initc  9 <%= to_initc(@base["08"]) %>
+initc 10 <%= to_initc(@base["0B"]) %>
+initc 11 <%= to_initc(@base["0A"]) %>
+initc 12 <%= to_initc(@base["0D"]) %>
+initc 13 <%= to_initc(@base["0E"]) %>
+initc 14 <%= to_initc(@base["0C"]) %>
 
-tput initc 15 <%= to_initc(@base["07"]) %> # Base 07 - Bright White
-tput initc 16 <%= to_initc(@base["09"]) %> # Base 09
-tput initc 17 <%= to_initc(@base["0F"]) %> # Base 0F
-tput initc 18 <%= to_initc(@base["01"]) %> # Base 01
-tput initc 19 <%= to_initc(@base["02"]) %> # Base 02
-tput initc 20 <%= to_initc(@base["04"]) %> # Base 04
-tput initc 21 <%= to_initc(@base["06"]) %> # Base 06
+initc 15 <%= to_initc(@base["07"]) %>
+initc 16 <%= to_initc(@base["09"]) %>
+initc 17 <%= to_initc(@base["0F"]) %>
+initc 18 <%= to_initc(@base["01"]) %>
+initc 19 <%= to_initc(@base["02"]) %>
+initc 20 <%= to_initc(@base["04"]) %>
+initc 21 <%= to_initc(@base["06"]) %>
+EOF
 
 # Text foreground color
 printf "\033]10;rgb:%s\033\\" "<%= split_by_slash(@base["02"]["hex"]) %>" # Base 02
