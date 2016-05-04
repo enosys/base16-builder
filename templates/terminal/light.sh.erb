@@ -1,0 +1,66 @@
+<%
+# Terminal Color Setup Template
+# Chris Kempson (http://chriskempson.com)
+%>#!/bin/sh -eu
+# Base16 <%= @scheme %> - Terminal color setup script
+# <%= @author %>
+#
+
+<%
+def to_initc(base)
+  base["rgb"].map { |color| (color * (1000/255.0)).ceil }.join(' ')
+end
+%>
+
+if ! tput ccc; then
+  return 1 2>/dev/null || exit 1
+fi
+
+tput -S <<EOF
+initc  0 <%= to_initc(@base["00"]) %>
+initc  1 <%= to_initc(@base["08"]) %>
+initc  2 <%= to_initc(@base["0B"]) %>
+initc  3 <%= to_initc(@base["0A"]) %>
+initc  4 <%= to_initc(@base["0D"]) %>
+initc  5 <%= to_initc(@base["0E"]) %>
+initc  6 <%= to_initc(@base["0C"]) %>
+initc  7 <%= to_initc(@base["05"]) %>
+initc  8 <%= to_initc(@base["03"]) %>
+
+initc  9 <%= to_initc(@base["08"]) %>
+initc 10 <%= to_initc(@base["0B"]) %>
+initc 11 <%= to_initc(@base["0A"]) %>
+initc 12 <%= to_initc(@base["0D"]) %>
+initc 13 <%= to_initc(@base["0E"]) %>
+initc 14 <%= to_initc(@base["0C"]) %>
+
+initc 15 <%= to_initc(@base["07"]) %>
+initc 16 <%= to_initc(@base["09"]) %>
+initc 17 <%= to_initc(@base["0F"]) %>
+initc 18 <%= to_initc(@base["01"]) %>
+initc 19 <%= to_initc(@base["02"]) %>
+initc 20 <%= to_initc(@base["04"]) %>
+initc 21 <%= to_initc(@base["06"]) %>
+EOF
+
+# Text foreground color
+printf "\033]10;rgb:%s\033\\" "<%= split_by_slash(@base["02"]["hex"]) %>" # Base 02
+
+# Text background color
+printf "\033]11;rgb:%s\033\\" "<%= split_by_slash(@base["07"]["hex"]) %>" # Base 07
+
+# Text cursor foreground
+printf "\033]12;rgb:%s\033\\" "<%= split_by_slash(@base["02"]["hex"]) %>" # Base 02
+
+# # foreground / background / cursor color
+# if [ -n "$ITERM_SESSION_ID" ]; then
+#   # iTerm2 proprietary escape codes
+#   printf_template_custom="\033]%s%s\033\\"
+#   printf $printf_template_custom Pg <%= @base["02"]["hex"] %> # forground
+#   printf $printf_template_custom Ph <%= @base["07"]["hex"] %> # background
+#   printf $printf_template_custom Pi <%= @base["02"]["hex"] %> # bold color
+#   printf $printf_template_custom Pj <%= @base["05"]["hex"] %> # selection color
+#   printf $printf_template_custom Pk <%= @base["02"]["hex"] %> # selected text color
+#   printf $printf_template_custom Pl <%= @base["02"]["hex"] %> # cursor
+#   printf $printf_template_custom Pm <%= @base["07"]["hex"] %> # cursor text
+# fi

@@ -1,9 +1,5 @@
-<%
-# Vim Template
-# Chris Kempson (http://chriskempson.com)
-
-%>" Base16 <%= @scheme %> (https://github.com/chriskempson/base16)
-" Scheme: <%= @author %>
+" Base16 Solarized (https://github.com/chriskempson/base16)
+" Scheme: Ethan Schoonover (http://ethanschoonover.com/solarized)
 
 " This enables the coresponding base16-shell script to run so that
 " :colorscheme works in terminals supported by base16-shell scripts
@@ -11,27 +7,27 @@
 "   let g:base16_shell_path=base16-builder/output/shell/
 if !has('gui_running')
   if exists("g:base16_shell_path")
-    execute "silent !/bin/sh ".g:base16_shell_path."/base16-<%= slug(@scheme) %>.".&background.".sh"
+    execute "silent !/bin/sh ".g:base16_shell_path."/base16-solarized.".&background.".sh"
   endif
 endif
 
 " GUI color definitions
-let s:gui00 = "<%= @base["00"]["hex"] %>"
-let s:gui01 = "<%= @base["01"]["hex"] %>"
-let s:gui02 = "<%= @base["02"]["hex"] %>"
-let s:gui03 = "<%= @base["03"]["hex"] %>"
-let s:gui04 = "<%= @base["04"]["hex"] %>"
-let s:gui05 = "<%= @base["05"]["hex"] %>"
-let s:gui06 = "<%= @base["06"]["hex"] %>"
-let s:gui07 = "<%= @base["07"]["hex"] %>"
-let s:gui08 = "<%= @base["08"]["hex"] %>"
-let s:gui09 = "<%= @base["09"]["hex"] %>"
-let s:gui0A = "<%= @base["0A"]["hex"] %>"
-let s:gui0B = "<%= @base["0B"]["hex"] %>"
-let s:gui0C = "<%= @base["0C"]["hex"] %>"
-let s:gui0D = "<%= @base["0D"]["hex"] %>"
-let s:gui0E = "<%= @base["0E"]["hex"] %>"
-let s:gui0F = "<%= @base["0F"]["hex"] %>"
+let s:gui00 = "002b36"
+let s:gui01 = "073642"
+let s:gui02 = "586e75"
+let s:gui03 = "657b83"
+let s:gui04 = "839496"
+let s:gui05 = "93a1a1"
+let s:gui06 = "eee8d5"
+let s:gui07 = "fdf6e3"
+let s:gui08 = "dc322f"
+let s:gui09 = "cb4b16"
+let s:gui0A = "b58900"
+let s:gui0B = "859900"
+let s:gui0C = "2aa198"
+let s:gui0D = "268bd2"
+let s:gui0E = "6c71c4"
+let s:gui0F = "d33682"
 
 " Terminal color definitions
 let s:cterm00 = "00"
@@ -63,7 +59,7 @@ endif
 " Theme setup
 hi clear
 syntax reset
-let g:colors_name = "base16-<%= @slug %>"
+let g:colors_name = "base16-solarized"
 
 " Highlighting function
 fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
@@ -80,7 +76,7 @@ fun <sid>hi(group, guifg, guibg, ctermfg, ctermbg, attr, guisp)
     exec "hi " . a:group . " ctermbg=" . s:cterm(a:ctermbg)
   endif
   if a:attr != ""
-    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr . " term=" . a:attr
+    exec "hi " . a:group . " gui=" . a:attr . " cterm=" . a:attr
   endif
   if a:guisp != ""
     exec "hi " . a:group . " guisp=#" . a:guisp
@@ -151,16 +147,16 @@ call <sid>hi("Exception",     s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("FoldColumn",    s:gui0C, s:gui01, s:cterm0C, s:cterm01, "", "")
 call <sid>hi("Folded",        s:gui03, s:gui01, s:cterm03, s:cterm01, "", "")
 call <sid>hi("IncSearch",     s:gui01, s:gui09, s:cterm01, s:cterm09, "none", "")
-call <sid>hi("Italic",        "", "", "", "", "italic", "")
+call <sid>hi("Italic",        "", "", "", "", "none", "")
 call <sid>hi("Macro",         s:gui08, "", s:cterm08, "", "", "")
-call <sid>hi("MatchParen",    s:gui07, s:gui00, s:cterm07, s:cterm00, "bold,underline", "")
+call <sid>hi("MatchParen",    s:gui00, s:gui03, s:cterm00, s:cterm03,  "", "")
 call <sid>hi("ModeMsg",       s:gui0B, "", s:cterm0B, "", "", "")
 call <sid>hi("MoreMsg",       s:gui0B, "", s:cterm0B, "", "", "")
 call <sid>hi("Question",      s:gui0D, "", s:cterm0D, "", "", "")
 call <sid>hi("Search",        s:gui06, s:gui01, s:cterm06, s:cterm01,  "", "")
 call <sid>hi("SpecialKey",    s:gui03, "", s:cterm03, "", "", "")
 call <sid>hi("TooLong",       s:gui08, "", s:cterm08, "", "", "")
-call <sid>hi("Underlined",    s:gui08, "", s:cterm08, "", "underline", "")
+call <sid>hi("Underlined",    s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("Visual",        "", s:gui01, "", s:cterm01, "", "")
 call <sid>hi("VisualNOS",     s:gui08, "", s:cterm08, "", "", "")
 call <sid>hi("WarningMsg",    s:gui08, "", s:cterm08, "", "", "")
@@ -255,8 +251,8 @@ call <sid>hi("GitGutterDelete",  s:gui08, s:gui01, s:cterm08, s:cterm01, "", "")
 call <sid>hi("GitGutterChangeDelete",  s:gui0E, s:gui01, s:cterm0E, s:cterm01, "", "")
 
 " HTML highlighting
-call <sid>hi("htmlBold",    s:gui0A, "", s:cterm0A, "", "bold", "")
-call <sid>hi("htmlItalic",  s:gui0E, "", s:cterm0E, "", "italic", "")
+call <sid>hi("htmlBold",    s:gui0A, "", s:cterm0A, "", "", "")
+call <sid>hi("htmlItalic",  s:gui0E, "", s:cterm0E, "", "", "")
 call <sid>hi("htmlEndTag",  s:gui05, "", s:cterm05, "", "", "")
 call <sid>hi("htmlTag",     s:gui05, "", s:cterm05, "", "", "")
 
